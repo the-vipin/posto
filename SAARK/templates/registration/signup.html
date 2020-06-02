@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p style="font-size: 25px; font-weight:600; margin:5px;">Create Account</p>
+<h2>{{essu}}</h2>
+<div class="B2">
+    <p class="B2B">If you already have an account <a href="{% url 'login' %}">Log in</a></p>
+</div>
+<div class="B1">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" onclick="alert('after click on signup , we will sent a confirmation link on given email address.')"value="Create New Account">
+    </form>
+</div>
+
+{% endblock %}
+

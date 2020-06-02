@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+body,p,a,h1,h2,h3,h4,h5,h6,div {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+{% block headertemp %}
+    {% include 'headerTemp.html' %}
+{% endblock %}
+<div style="display:flex; margin:10px; width:100%;">
+    <div><img src="{{object.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+    <div style="padding:10 15px; width:calc(100% - 50px);"><h3 style="line-height: 20px;">{{object.BloggerName}}</h3></div>
+</div>
+<style>
+.linkbar div {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+.linkbar div a {
+    text-decoration: none;
+    color: blue;
+    font-size: 17px;
+    font-weight: 600;
+}
+</style>
+<div class="linkbar">
+    <div><a href="{% url 'viewblogger' object.slug %}">View Blog</a></div>
+    <div><a href="{% url 'updateblogger' object.slug %}">Edit details</a></div>
+    <div><a href="{% url 'deleteblogger' object.slug %}">Permanent Delete Blogger account</a></div>
+    <div><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">Leave Blogger Account</a></div>
+</div>
+<div>
+<style>
+.videotabcontent {
+    display: none;
+}
+.tab button {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    }
+.tab button.active {
+    background-color: #0095ff;
+    color: white;
+    border: none;
+}
+
+.tabcontent {
+    padding: 10px 0px;
+    color: black;
+}
+</style>
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'playlist')">playlist</button>
+    <button class="tablinks" onclick="openCity(event, 'Members')">Members</button>
+    <button class="tablinks active" onclick="openCity(event, 'Blogs')">Blogs</button>
+</div>
+<div id="playlist" class="tabcontent videotabcontent">
+    COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service
+</div>
+<div id="Members" class="tabcontent videotabcontent">
+    <a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">Add members</a>
+    {% for x in object.Members.all %}
+        <div style="display:flex; margin:10px; width:100%;">
+            <div><img src="{{x.userprofile.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+            <div style="padding:10 15px; width:calc(100% - 200px);"><h3 style="line-height: 20px;">{{x.username}}</h3></div>
+            <div style="width:150px;"><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">remove members</a></div>
+        </div>
+    {% endfor %}
+</div>
+<style>
+    .searchedblog {
+        width: 100%;
+        display: flex;
+        margin-top: 5px;
+        max-width: 500px;
+    }
+    .searchedblog .BoxA {
+        width: 40%;
+    }
+    .searchedblog .BoxA img {
+        width: 100%;
+    }
+    .searchedblog .BoxB {
+        width: 60%;
+        padding: 5px;
+    }
+    .searchedblog .BoxB .B1 {
+        font-size: 17px;
+        color: black;
+    }
+    .searchedblog .BoxB .B2 {
+        font-size: 14px;
+        color: grey;
+    }
+</style>
+<style>
+    .dropbtn, .dropbtnB {
+        background-color: transparent;
+        color: #ff4000;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    #userprofilesettings,#moredetailsofblog {
+        background-color: #ffece6;
+        padding: 15px;
+        margin: 0px 15px;
+        display: none;
+    }
+    #userprofilesettings a {
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    #userprofilesettings div{
+        border-bottom: 1px solid #ffb399;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+    </style>
+<div id="Blogs" class="tabcontent ">
+    <a href="{% url 'createBlog' object.slug %}">Create blog</a>
+    {% for X in Blogslist %}
+        <div>
+            {% if X.ReadyToShow == True %}
+                <p style="background-color: green;">Your blog is ready. Now your audience can see your blog</p>
+            {% else %}
+                <p style="background-color: red;">we had received your blog's docs file. and we are working on them. Please wait </p>
+            {% endif %}
+        </div>
+        <div class="searchedblog">
+            <div class="BoxA"><img src="{{X.image.url}}"></div>
+            <div class="BoxB">
+                <p class="B1">{{X.Blogtiltle}}</p>
+                <p class="B2">{{X.BloggerAc.BloggerName}}</p>
+                <p class="B2">{{X.created}}</p>
+            </div>
+            <div style="padding:10px 15px;">
+                <button class="dropbtn"><i class="material-icons" style="font-size:30px;">more_vert</i></button>
+                <button class="dropbtnB" style="margin-top:20px 0;"><i class="material-icons">arrow_drop_down_circle</i></button>
+            </div>
+        </div>
+        <div id="moredetailsofblog">
+            <p>uploader: {{X.Uploader}}</p> 
+            <p>Likes:[{{X.Dislikes.count}}]</p>
+            <p> Dislikes:[{{X.Dislikes.count}}]</p>
+            <p>Blog Created on : {{X.created }} </p>
+            <p> last modified :{{X.modified}}</p>
+        </div>
+        <div id="userprofilesettings">
+            <div><a href="{% url 'updateblog' X.slug %}">Update Blog Details</a></div>
+            <div><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">Edit Blog</a></div>
+            <div><a href="{% url 'deleteblog' X.slug %}">Delete Blog</a></div>
+            <div><a href="{% url 'BlogPostview' X.slug %}" >View Blog</a></div>
+        </div>
+        <script>
+        $(document).ready(function(){
+            $(".dropbtn").click(function(){
+                $("#userprofilesettings").toggle();
+            });
+            $(".dropbtnB").click(function(){
+                $("#moredetailsofblog").toggle();
+            });
+        });
+
+        </script>
+    {% endfor %}
+</div>
+<script>
+function openCity(evt, typed) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(typed).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>     
+</div>
+
+
+</body>
+</html>

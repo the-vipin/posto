@@ -1,0 +1,24 @@
+{% autoescape off %}
+Dear {{ user.first_name }},
+
+Thanks for Registering with Posto.com
+
+varify Registeration by tapping on below link
+
+http://127.0.0.1:8000{% url 'activate' uidb64=uid token=token %}
+
+If you receive this email by mistake,simply ignore it.
+
+Your login details are given below:
+
+username - {{user.username}}
+
+Full name - {{user.first_name}} {{user.last_name}}
+
+Wishing You a very Good Day ahead
+
+Thanking You 
+
+Team posto
+
+{% endautoescape %}

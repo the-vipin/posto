@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liked Blogs</title>
+<style>
+body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.searchedbloglist {
+    padding: 10px;
+}
+.searchedbloglist a {
+    text-decoration: none;
+}
+.searchedblog {
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+    max-width: 500px;
+}
+.searchedblog .BoxA {
+    width: 50%;
+}
+.searchedblog .BoxA img {
+    width: 100%;
+}
+.searchedblog .BoxB {
+    width: 50%;
+    padding: 5px;
+}
+.searchedblog .BoxB .B1 {
+    font-size: 17px;
+    color: black;
+}
+.searchedblog .BoxB .B2 {
+    font-size: 14px;
+    color: grey;
+}
+</style>
+</head>
+<body>
+{% block headertemp %}
+    {% include 'headerTemp.html' %}
+{% endblock %}
+<p style="font-size: 25px; font-weight:600; margin:5px;">Liked Blogs</p>
+    <div class="searchedbloglist">
+        {% for X in blogs %}
+            <a href="{% url 'BlogPostview' X.slug %}">
+                <div class="searchedblog">
+                    <div class="BoxA"><img src="{{X.image.url}}"></div>
+                    <div class="BoxB">
+                        <p class="B1">{{X.Blogtiltle}}</p>
+                        <p class="B2">{{X.BloggerAc.BloggerName}}</p>
+                        <p class="B2">{{X.created}}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+</body>
+</html>

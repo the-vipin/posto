@@ -1,0 +1,101 @@
+{% load static %}
+{% block blogpost %}
+<style>
+    body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6 {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        
+    }
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+    
+    div.desc {
+        width: 100%;
+    }
+    div.desc .img {
+        width: 50px;
+        margin: 5px;
+        border-radius: 50%;
+        display: inline-block;
+        background-color: white;
+    }
+    div.desc .p {
+        margin: 5px 0;
+        font-size: 19px;
+        color: black;
+        display: inline-block;
+        width: calc(100% - 70px);
+    }
+    .responsive {
+        float: left;
+        width: 24%;
+        height: 220px;
+        margin: 5px 5px;
+    }
+    .responsive a {
+        text-decoration: none;
+    }
+    @media only screen and (max-width: 1200px)  {
+        .responsive {
+            width: 32%;
+            height: 240px;
+        }
+    }
+    @media only screen and (max-width: 900px)  {
+        .responsive {
+            width: 31.55%;
+            height: 220px;
+        }
+    }
+    @media only screen and (max-width: 800px)  {
+        .responsive {
+            width: 31.55%;
+            height: 230px;
+        }
+    }
+    @media only screen and (max-width: 670px)  {
+        .responsive {
+            width: 48%;
+            height: 230px;
+        }
+    }
+    @media only screen and (max-width: 600px)  {
+        .responsive {
+            width: 47%;
+            height: 220px;
+        }
+    }
+    @media only screen and (max-width: 400px)  {
+        .responsive {
+            width: 100%;
+            height: auto;
+            margin: 0;
+        }
+    }
+    </style>
+    <div class="contentcox">
+        {% for X in Blogslist %}
+            <div class="responsive">
+                <a href="{% url 'BlogPostview' X.slug %}">
+                <div class="gallery">
+                    <img src="{{X.image.url}}" alt="{{X.Blogtiltle}}" width="600" height="400">
+                </div>
+                <div class="desc">
+                    <div class="img">
+                        <img src="{{X.BloggerAc.image.url}}" width="50px" height="50px">
+                    </div>
+                    <div class="p">
+                        <p>{{X.Blogtiltle}}</p>
+                        <p style="font-size: 16px; color:#8a8a8a;">{{X.BloggerAc.BloggerName}} :{{X.created}}</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

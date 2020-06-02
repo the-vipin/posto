@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.B3 {
+    padding: 10px;
+}
+.B3 .B3C {
+    background-color: #ffece6;
+    padding: 15px;
+}
+.B3 .B3C p {
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+}
+.B3 .B3B a {
+    color: #ff4000;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+</style>
+<div class="B3">
+    <div class="B3A">
+        <h2>Hello, {{user.username}} </h2>
+    </div>
+    <div class="B3C">
+        <p>we have sent you an email</p>
+        <p>confirm ur email address to complete registration and than go to login page.link is valid for only 2 minute. so make sure that your gmail is open first</p>
+    </div>
+    <div class="B3B">
+        <a href="{% url 'login' %}">Log in</a>
+        <a href="{% url 'signup' %}">Try Again</a>
+    </div>
+</div>
+{% endblock %}

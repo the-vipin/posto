@@ -1,0 +1,99 @@
+{% load static %}
+{% block headertemp %}
+<style>
+    .header {
+        background-color: #ff4000;
+        padding: 10px;
+        color: white;
+        border: 1px solid green;
+    }
+    .header .HeaderBox {
+        display: flex;
+        height: 35px;
+        width: 100%;
+    }
+    .header .HeaderBox .BA {
+        width: calc(100% - 130px);
+        font-size: 20px;
+    }
+    .header .HeaderBox .BA h2 a {
+        color: white;
+        text-decoration: none;
+    }
+    .header .HeaderBox .BC {   
+    }
+    .header .HeaderBox .BC a img {
+        width:35px;
+        background-color: white; 
+        border-radius:50%;
+    }
+    .header .HeaderBox .BB {
+        width: 50px;
+    }
+    .header .HeaderBox .BB a {
+        width: 35px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .header .HeaderBox .BD {
+        width: 50px;
+        padding-top: 5px;
+    }
+    .header  .HeaderBox .BD button {
+        background-color: transparent;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #sidenavbar {
+        background-color: #ffece6;
+        padding: 15px;
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        height: 100%;
+    }
+    #sidenavbar a {
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    #sidenavbar div{
+        border-bottom: 1px solid #ffb399;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+    </style>
+    
+<div class="header">
+    <div class="HeaderBox">
+        <div class="BD"><button style="font-size:24px" class="morebtn"><i class="material-icons">menu</i></button></div>
+        <div class="BA"><h2><a href="{% url 'home' %}">Posto</a></h2></div>
+        <div class="BB"><a href="{% url 'search' %}"><i class="material-icons">search</i></a></div>
+        
+        <div class="BC">
+            <a href="{% url 'profile' %}">
+                {% if user.is_authenticated %}
+                    <img src="{{user.userprofile.image.url}}" >
+                {% else %}
+                    <img src="{% static 'default.png' %}">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+</div>
+<div id="sidenavbar">
+    <div><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">library</a></div>
+    <div><a href="{% url 'likedblogs' %}">Liked Blogs</a></div>
+</div>
+<script>
+$(document).ready(function(){
+    $(".morebtn").click(function(){
+        $("#sidenavbar").toggle();
+    });
+});
+
+</script>
+
+{% endblock %} 

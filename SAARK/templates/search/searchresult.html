@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<style>
+body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #ffece6;
+}
+.Searchbox {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    padding: 5px;
+    background-color: #ff6633;
+}
+.Searchbox input {
+    width: 84%;
+    height: 30px;
+    border: none;
+    background-color: #ffd9cc;
+}
+.Searchbox input[type=submit]{
+    width: 10%;
+    height: 30px;
+    border: none;
+    font-size: 15px;
+    color: white;
+    background-color: #ff9f80;
+    font-weight: 600;
+}
+</style>
+<div class="Searchbox" id="searchbox">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="search" name="q" id="" placeholder="Search blog" value="{{searched}}">
+        <input type="submit" value="Go">
+    </form>
+</div>
+
+<style>
+.searchedbloglist {
+    padding: 10px;
+}
+.searchedbloglist a {
+    text-decoration: none;
+}
+.searchedblog {
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+    max-width: 500px;
+}
+.searchedblog .BoxA {
+    width: 50%;
+}
+.searchedblog .BoxA img {
+    width: 100%;
+}
+.searchedblog .BoxB {
+    width: 50%;
+    padding: 5px;
+}
+.searchedblog .BoxB .B1 {
+    font-size: 17px;
+    color: black;
+}
+.searchedblog .BoxB .B2 {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+<div class="searchedbloglist">
+{% for X in blogs %}
+    <a href="{% url 'BlogPostview' X.slug %}">
+        <div class="searchedblog">
+            <div class="BoxA"><img src="{{X.image.url}}"></div>
+            <div class="BoxB">
+                <p class="B1">{{X.Blogtiltle}}</p>
+                <p class="B2">{{X.BloggerAc.BloggerName}}</p>
+                <p class="B2">{{X.created}}</p>
+            </div>
+        </div>
+    </a>
+{% endfor %}
+</div>
+</body>
+</html>

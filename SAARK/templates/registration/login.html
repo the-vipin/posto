@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<p style="font-size: 25px; font-weight:600; margin:5px;">Log In</p>
+<div class="B1">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="log in">
+    </form>
+</div>
+<div class="B2">
+    <p class="B2B">if you are new at Posto.com <a href="{% url 'signup' %}">Create account</a></p>
+</div>
+{% endblock %}

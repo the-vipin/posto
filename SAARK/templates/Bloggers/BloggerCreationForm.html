@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .B1 form select{
+        color: red;
+    }
+</style>
+<p style="font-size: 25px; font-weight:600; margin:5px;">Create Account</p>
+<div class="B1">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Create Blogger Account">
+    </form>
+</div>
+
+{% endblock %}

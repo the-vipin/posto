@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribed users</title>
+    <style>
+        body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6 {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: black;
+        }
+        </style>
+</head>
+<body>
+{% block headertemp %}
+    {% include 'headerTemp.html' %}
+{% endblock %}
+<div>
+{% for X in bloggers %}
+    {% if user in X.subscribers.all %}
+    <div style="display:flex; margin:10px; width:100%;">
+        <div><img src="{{X.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+        <div style="padding:0 15px; width:calc(100% - 200px);"><h3 style="line-height: 20px; color:white;">{{X.BloggerName}}</h3></div>
+        <div style=" width:150px;">
+            <a href="{% url 'viewblogger' X.slug %}">View blogpage</a><br>
+            <a href="{% url 'bloggersubscribetoggle' X.slug %}"> 
+                {% if user in X.subscribers.all %}
+                    Subscribed
+                {% else %}
+                    SUBSCRIBE
+                {% endif%}
+            </a>
+        </div>
+    </div>
+    <div style="display:flex; padding:5px; width:100%;">
+        <div style="display:inline-block;"><img src="{{object.BloggerAc.image.url}}" width="45px"  style="background-color: #ffece6; border-radius: 12px;" alt=""></div>
+        <div style="padding:0 15px; display:inline-block;">
+            <p style="line-height: 20px;"><a href="{% url 'viewblogger' X.slug %}" style="text-decoration: none; color:black; font-size:17px;">{{object.BloggerAc.BloggerName}}</a></p>
+            <p style="font-size: 15px; color:#666666;">{{object.created}}</p>
+        </div>
+        <div style="display:inline-block;">    
+            {% if user in X.subscribers.all %}
+                <a href="{% url 'bloggersubscribetoggle' X.slug %}" style="text-decoration: none;  padding:5px; background-color:#ff8c66; color:white;">Subscribed</a>
+            {% else %}
+                <a href="{% url 'bloggersubscribetoggle' X.slug %}" style="text-decoration: none;  padding:5px; background-color:white; color:#ff8c66; border:1px solid #ff8c66;">Subscribe</a>
+            {% endif%}
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+
+</body>
+</html>

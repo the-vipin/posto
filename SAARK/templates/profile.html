@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webname | {{user.username}} </title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6 {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+<style>
+.dropbtn {
+    background-color: transparent;
+    color: #ff4000;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+#userprofilesettings {
+    background-color: #ffece6;
+    padding: 15px;
+    margin: 0px 15px;
+    display: none;
+}
+#userprofilesettings a {
+    color: black;
+    font-weight: 600;
+}
+#userprofilesettings div {
+    border-bottom: 1px solid #ffb399;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+</style>
+<div style="display:flex; margin:10px; width:100%;">
+    <div><img src="{{user.userprofile.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+    <div style="padding:10 15px; width:calc(100% - 100px);"><h3 style="line-height: 20px;">{{user.username}}</h3></div>
+    <div style="padding:10px 15px;">
+        <button class="dropbtn"><i class="material-icons" style="font-size:30px;">more_vert</i></button>
+    </div>
+</div>
+<div id="userprofilesettings">
+    <div><a href="#">Update connetions</a></div>
+    <div><a href="{% url 'update-profile' %}">Update Profile</a></div>
+    <div><a href="{% url 'logout' %}">logout</a></div>
+</div>
+<script>
+$(document).ready(function(){
+    $(".dropbtn").click(function(){
+        $("#userprofilesettings").toggle();
+    });
+});
+</script>
+<style>
+.linkbar div {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+.linkbar div a {
+    text-decoration: none;
+    color: blue;
+    font-size: 17px;
+    font-weight: 600;
+}
+</style>
+<div class="linkbar">
+    <div><a href="{% url 'subscribedbloggers' %}">Subscribed Bloggers</a></div>
+    <div><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">History</a></div>
+    <div><a href="" onclick="alert('COMING SOON... This service is not available now. We are working on it as soon as possible we must provide this service')">library</a></div>
+    <div><a href="{% url 'likedblogs' %}">Liked Blogs</a></div>
+</div>
+<div>
+<style>
+.videotabcontent {
+    display: none;
+}
+.tab button {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    }
+.tab button.active {
+    background-color: #ff4000;
+    color: white;
+    border: none;
+}
+
+.tabcontent {
+    padding: 10px 0px;
+    color: black;
+}
+</style>
+<div>
+    <p>Your Blogger Accounts</p>
+</div>
+<div class="tab">
+    <button class="tablinks active" onclick="openCity(event, 'Membered')">Joined</button>
+    <button class="tablinks" onclick="openCity(event, 'Founded')">Founded</button>
+    <a href="{% url 'createblogger' %}" style="text-decoration: none; color:white;">
+        <button class="tablinks" onclick="openCity(event, 'Create')">Create new</button>
+    </a>
+
+</div>
+<div id="Membered" class="tabcontent">
+    {% for X in blogpages %}
+        <div style="display:flex; margin:10px; width:100%;">
+            <div><img src="{{X.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+            <div style="padding:0 15px; width:calc(100% - 200px);"><h3 style="line-height: 20px;">{{X.BloggerName}}</h3></div>
+            <div style=" width:150px;"><a href="{% url 'dashboard' X.slug %}">dashboard</a><br><a href="{% url 'viewblogger' X.slug %}">View blogpage</a></div>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+<div id="Founded" class="tabcontent videotabcontent">
+    {% for X in founderblogpages %}
+        <div style="display:flex; margin:10px; width:100%;">
+            <div><img src="{{X.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt=""></div>
+            <div style="padding:0 15px; width:calc(100% - 200px);"><h3 style="line-height: 20px;">{{X.BloggerName}}</h3></div>
+            <div style="width:150px;"><a href="{% url 'dashboard' X.slug %}">dashboard</a><br><a href="{% url 'viewblogger' X.slug %}">View blogpage</a></div>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+<div id="Create" class="tabcontent videotabcontent">
+</div>
+<script>
+function openCity(evt, typed) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(typed).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>     
+</div>
+
+
+</body>
+</html>

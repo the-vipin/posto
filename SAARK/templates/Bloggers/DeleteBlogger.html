@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>delete blogger</title>
+</head>
+<body>
+    <p>Delete Blogger</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p style="color: red;">are you sure to delete Blogger account</p>
+        <button style="background-color: red; color:white; border:none; padding:10px; font-size:15px; font-weight:600;" type="submit">yes, delete</button>
+        <a style="text-decoration: none; border: 1px solid #42EADDFF; color:#42EADDFF; padding:8px;" href="{% url 'dashboard' object.slug %}">cancel</a>
+    </form>
+</body>
+</html>

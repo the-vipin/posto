@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<p style="font-size: 25px; font-weight:600; margin:5px;">Edit Information</p>
+<div class="B1">
+    <form action="{% url 'update-profile' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{U_form}}
+        {{P_form}}
+        <input type="submit" value="Update Account">
+    </form>
+</div>
+<div class="B2">
+    <p class="B2B">If you want to update contact option <a href="#">Tap here</a></p>
+</div
+    
+{% endblock %}

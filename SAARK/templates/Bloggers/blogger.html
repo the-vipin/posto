@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+
+<style>
+body,h1,h2,a,p,h3,h4,h5,h6,div {
+    margin: 0;
+    padding: 0;
+}
+.BloggerBoxA {
+    width: 100%;
+}
+.videotabcontent {
+    display: none;
+}
+.tab button {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    transition: 0.3s;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+  }
+.tab button.active {
+    background-color: #ff4000;
+    color: white;
+    border: none;
+}
+
+.tabcontent {
+    padding: 10px 0px;
+    color: white;
+}
+</style>
+</head>
+<body>
+<style>
+.BloggerName {
+    margin: 20px;
+    display: flex;
+}
+
+
+</style>
+<div class="BloggerBoxA">
+    <div class="BloggerName">
+        <div class="BN1" style="display:inline-block;"><img src="{{object.image.url}}" width="80px" style="background-color: azure; border-radius:50%;"  alt="{{object.BloggerName}}"></div>
+        <div class="BN2" style="display:inline-block; padding:5px;">
+            <h2 style="line-height: 40px;">{{object.BloggerName}}</h2>
+            <p>subscribers : {{object.subscribers.count}}</p>
+        </div>
+        <div class="BN3" style="display:inline-block;">
+            {% if user in object.subscribers.all %}
+                <a href="{% url 'bloggersubscribetoggle' object.slug %}" style="text-decoration: none;  padding:5px; background-color:#ff8c66; color:white; line-height:60px;">SUBCRIBED</a>
+            {% else %}
+                <a href="{% url 'bloggersubscribetoggle' object.slug %}" style="text-decoration: none;  padding:5px; background-color:white; color:#ff8c66; border:1px solid #ff8c66; line-height:60px;">SUBCRIBE</a> 
+            {% endif%}
+        </div>
+    </div>
+    <div class="tab">
+        <button class="tablinks active" onclick="openCity(event, 'blogs')">BLOGS</button>
+        <button class="tablinks" onclick="openCity(event, 'playlist')">PLAYLIST</button>
+        <button class="tablinks" onclick="openCity(event, 'community')">COMMUNITY</button>
+        <button class="tablinks" onclick="openCity(event, 'about')">ABOUT</button>
+    </div>
+</div>
+
+<div id="blogs" class="tabcontent">
+    {% block blogpost %}
+        {% include 'blogs/blogslist.html' %}
+    {% endblock %}
+</div>
+<div id="playlist" class="tabcontent videotabcontent">
+    <p>Coming Soon</p> 
+</div>
+<div id="community" class="tabcontent videotabcontent">
+    {% for x in object.Members.all %}
+        <div style="display:flex; margin:10px">
+            <img src="{{x.userprofile.image.url}}" width="50px" style="background-color: azure; border-radius:50%;" alt="">
+            <h3 style="line-height: 50px; padding-left:20px; color:black;">{{x.username}}</h3>
+        </div>
+    {% endfor %}
+</div>
+<div id="about" class="tabcontent videotabcontent">
+    <p>Coming Soon</p> 
+</div>
+<script>
+    function openCity(evt, typed) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(typed).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+</script> 
+</body>
+</html>

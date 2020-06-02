@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+</head>
+<body>
+{% block headertemp %}
+    {% include 'headerTemp.html' %}
+{% endblock %}
+<style>
+body,div,ul,li,img,a,p,h1,h2,h3,h4,h5,h6,input {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.B1 {
+    width: 100%;
+}
+.B1 form {
+    padding: 10px;
+    margin: auto;
+}
+.B1 form input {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    padding: 5px 0;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid #992600;
+    background-color: #ffece6;
+}
+
+.B1 form label {
+    font-size: 18px;
+    color: #ff4000;
+    font-weight: 600;
+    display: block;
+}
+.B1 form input[type=submit]{
+    background-color: #ff4000;
+    border: none;
+    color: white;
+}
+.B2 {
+    width: 100%;
+    padding: 5px;
+}
+.B2 .B2B {
+    font-size: 19px;
+    color: blue;
+    font-weight: 600;
+}
+.B2 .B2B a {
+    color: red;
+}
+</style>
+{% block content %}
+{% endblock %}
+</body>
+</html>
